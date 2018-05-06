@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import OneSignal
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +18,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // Recommend moving the below line to prompt for push after informing the user about
+        //   how your app will use them.
+        
+        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+        
+        OneSignal.initWithLaunchOptions(launchOptions,
+                                        appId: "899d137a-a6ab-4651-a157-009aaac9a802",
+                                        handleNotificationAction: nil,
+                                        settings: onesignalInitSettings)
+        
+        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
+        
+        OneSignal.promptForPushNotifications(userResponse: { accepted in
+            print("User accepted notifications: \(accepted)")
+        })
         return true
     }
 
@@ -40,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+
 
 
 }

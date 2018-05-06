@@ -1,0 +1,6 @@
+framework module Pods_GNFWebView {
+  umbrella header "Pods-GNFWebView-umbrella.h"
+
+  export *
+  module * { export * }
+}
